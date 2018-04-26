@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.idea/
+dist
+build
+pfs.egg-info
+pfs.spec
