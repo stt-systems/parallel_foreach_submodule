@@ -1,0 +1,46 @@
+from setuptools import setup
+from parallelforeachsubmodule.metadata import Metadata
+
+metadata = Metadata()
+
+
+def requirements():
+    """Build the requirements list for this project"""
+    requirements_list = []
+
+    with open('requirements.txt') as requirements:
+        for install in requirements:
+            requirements_list.append(install.strip())
+
+    return requirements_list
+
+long_description = """"
+
+Brief
+    """
+
+
+setup(
+    name = 'pfs',
+    packages = ['parallelforeachsubmodule'],
+    install_requires = requirements(),
+    version = metadata.get_version(),
+    license = 'LGPL v3',
+    description = 'Tool for "git submodule foreach" execution in parallel ',
+    long_description= long_description,
+    author = metadata.get_author(),
+    author_email = 'contact@rdch106.hol.es',
+    url = 'https://github.com/RDCH106/parallel_foreach_submodule',
+    download_url = 'https://github.com/RDCH106/parallel_foreach_submodule/archive/v'+metadata.get_version()+'.tar.gz',
+    entry_points={
+        'console_scripts': ['pfs=parallelforeachsubmodule.main:main'],
+    },
+    keywords = 'background console windows gnu-linux',
+    classifiers = ['Programming Language :: Python',
+                   'Programming Language :: Python :: 2.7',
+                   'Programming Language :: Python :: 3.2',
+                   'Programming Language :: Python :: 3.3',
+                   'Programming Language :: Python :: 3.4',
+                   'Programming Language :: Python :: 3.5',
+                   'Programming Language :: Python :: 3.6'],
+)
