@@ -14,7 +14,8 @@ def requirements():
 
     return requirements_list
 
-long_description = """
+long_description = """"
+
 Parallel Foreach Submodule
 --------------------------
 
