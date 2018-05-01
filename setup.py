@@ -15,9 +15,8 @@ def requirements():
     return requirements_list
 
 long_description = """
-
 Parallel Foreach Submodule
-==========================
+--------------------------
 
 Parallel Foreach Submodule (PFS) is a tool for “git submodule foreach”
 execution in parallel.
