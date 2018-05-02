@@ -25,7 +25,7 @@ class PFS(object):
         parser.add_argument('-v', '--version', action='version', version=self.meta.get_version())
         parser.add_argument('-p', '--path', dest='path', help='System path where execution starts',
                             type=self.exists_path, default=".")
-        parser.add_argument('-c', '--command', dest='command', help='Git command',
+        parser.add_argument('-c', '--command', dest='command', help='Command to execute',
                             type=self.empty_cmd, default="")
         parser.add_argument('-j', '--jobs', dest='jobs',
                                       help='Number of concurrent jobs. Use -j 0 to use automatically the best maximum number of jobs', type=self.valid_jobs, default=1)
