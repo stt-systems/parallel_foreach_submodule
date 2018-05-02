@@ -7,6 +7,7 @@ import threading
 import os
 import re
 import time
+import multiprocessing
 
 
 def worker(submodule_list, path, command):
@@ -27,7 +28,7 @@ class PFS(object):
         parser.add_argument('-c', '--command', dest='command', help='Git command',
                             type=self.empty_cmd, default="")
         parser.add_argument('-j', '--jobs', dest='jobs',
-                                      help='Number of concurrent jobs', type=int, default=1)
+                                      help='Number of concurrent jobs. Use -j 0 to use automatically the best maximum number of jobs', type=self.valid_jobs, default=1)
         self.args = parser.parse_args()
 
         self.__submodule_path_pattern = re.compile('path ?= ?([A-za-z0-9-_]+)(\/[A-za-z0-9-_]+)*([A-za-z0-9-_])')
@@ -44,6 +45,16 @@ class PFS(object):
         if cmd == "":
             raise argparse.ArgumentTypeError("git cmd is empty")
         return cmd
+
+    @staticmethod
+    def valid_jobs(jobs):
+        if not str(jobs).isdigit():
+            raise argparse.ArgumentTypeError("invalid int value: '%s'" % str(jobs))
+        if int(jobs) > multiprocessing.cpu_count() * 2:
+            raise argparse.ArgumentTypeError("%s jobs are too many jobs for your computer" % str(jobs))
+        if int(jobs) == 0:
+            return multiprocessing.cpu_count()
+        return int(jobs)
 
     def read_submodules(self, file):
         submodules = list()
