@@ -23,7 +23,7 @@ class PFS(object):
         # Parse arguments provided
         parser = argparse.ArgumentParser()
         parser.add_argument('-v', '--version', action='version', version=self.meta.get_version())
-        parser.add_argument('-p', '--path', dest='path', help='System path where start execution',
+        parser.add_argument('-p', '--path', dest='path', help='System path where execution starts',
                             type=self.exists_path, default=".")
         parser.add_argument('-c', '--command', dest='command', help='Git command',
                             type=self.empty_cmd, default="")
