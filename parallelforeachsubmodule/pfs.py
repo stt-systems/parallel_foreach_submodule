@@ -28,7 +28,7 @@ class PFS(object):
         parser.add_argument('-c', '--command', dest='command', help='Command to execute',
                             type=self.empty_cmd, default="")
         parser.add_argument('-j', '--jobs', dest='jobs',
-                                      help='Number of concurrent jobs. Use -j 0 to use automatically the best maximum number of jobs', type=self.valid_jobs, default=1)
+                                      help='Number of concurrent jobs. Use -j 0 to use automatically the best maximum number of jobs', type=self.valid_jobs, default=2)
         self.args = parser.parse_args()
 
         self.__submodule_path_pattern = re.compile('path ?= ?([A-za-z0-9-_]+)(\/[A-za-z0-9-_]+)*([A-za-z0-9-_])')
