@@ -71,7 +71,7 @@ setup(
     entry_points={
         'console_scripts': ['pfs=parallelforeachsubmodule.main:main'],
     },
-    keywords = 'background console windows gnu-linux',
+    keywords = 'git parallel submodule windows gnu-linux',
     classifiers = ['Programming Language :: Python',
                    'Programming Language :: Python :: 2.7',
                    'Programming Language :: Python :: 3.2',
