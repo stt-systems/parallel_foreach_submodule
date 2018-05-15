@@ -2,6 +2,7 @@
 
 from parallelforeachsubmodule.metadata import Metadata
 from parallelforeachsubmodule.process import PFSProcess
+from parallelforeachsubmodule.status import Counter
 import argparse
 import threading
 import os
@@ -10,15 +11,16 @@ import time
 import multiprocessing
 
 
-def worker(submodule_list, path, command):
+def worker(submodule_list, path, command, counter):
     for submodule in submodule_list:
-        PFSProcess(submodule, path, command).run()
+        PFSProcess(submodule, path, command, counter).run()
 
 
 class PFS(object):
     def __init__(self):
         self.meta = Metadata()
         self.__threads = list()
+        self.__counter = Counter()
 
         # Parse arguments provided
         parser = argparse.ArgumentParser()
@@ -92,7 +94,7 @@ class PFS(object):
 
         print("Running with " + str(num_jobs) + " threads...")
         for i in range(num_jobs):
-            t = threading.Thread(target=worker, args=(list_submodule_list[i], self.args.path, self.args.command,))
+            t = threading.Thread(target=worker, args=(list_submodule_list[i], self.args.path, self.args.command, self.__counter,))
             self.__threads.append(t)
             t.start()
 
