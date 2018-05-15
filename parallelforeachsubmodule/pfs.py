@@ -20,7 +20,7 @@ class PFS(object):
     def __init__(self):
         self.meta = Metadata()
         self.__threads = list()
-        self.__counter = Counter()
+        self.__counter = None
 
         # Parse arguments provided
         parser = argparse.ArgumentParser()
@@ -77,6 +77,7 @@ class PFS(object):
         with open(os.path.join(self.args.path, '.gitmodules')) as f:
             submodules = self.read_submodules(f)
 
+        self.__counter = Counter(len(submodules))
         print(str(len(submodules)) + " submodules")
 
         list_submodule_list = list()
