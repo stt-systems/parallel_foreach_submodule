@@ -3,6 +3,8 @@
 from parallelforeachsubmodule.metadata import Metadata
 from parallelforeachsubmodule.process import PFSProcess
 from parallelforeachsubmodule.status import Counter
+from parallelforeachsubmodule.chunker import split_load
+from parallelforeachsubmodule.scheduler import Scheduler
 import argparse
 import threading
 import os
@@ -12,8 +14,12 @@ import multiprocessing
 
 
 def worker(submodule_list, path, command, counter):
-    for submodule in submodule_list:
-        PFSProcess(submodule, path, command, counter).run()
+    if isinstance(submodule_list, Scheduler):
+        while not submodule_list.empty():
+            PFSProcess(submodule_list.get(), path, command, counter).run()
+    else:
+        for submodule in submodule_list:
+            PFSProcess(submodule, path, command, counter).run()
 
 
 class PFS(object):
@@ -29,6 +35,9 @@ class PFS(object):
                             type=self.exists_path, default=".")
         parser.add_argument('-c', '--command', dest='command', help='Command to execute',
                             type=self.empty_cmd, default="")
+        parser.add_argument('-s', '--schedule', dest='schedule', help='Scheduling strategy', default='load-share',
+                            choices=['CHUNK', 'LOAD-SHARE'],
+                            type=lambda s: s.upper())
         parser.add_argument('-j', '--jobs', dest='jobs',
                                       help='Number of concurrent jobs. Use -j 0 to use automatically the best maximum number of jobs', type=self.valid_jobs, default=2)
         self.args = parser.parse_args()
@@ -80,26 +89,30 @@ class PFS(object):
         self.__counter = Counter(len(submodules))
         print(str(len(submodules)) + " submodules")
 
-        list_submodule_list = list()
-        num_jobs = 0
-        while num_jobs < self.args.jobs:
-            list_submodule_list.append(list())
-            num_jobs += 1
-
-        i = 0
-        for submodule in submodules:
-            list_submodule_list[i % num_jobs].append(submodule)
-            i += 1
+        if self.args.schedule == "load-share":
+            # Load Share Scheduling
+            # ----------------------------
+            scheduler = Scheduler(submodules)
+        else:
+            # Chunk Scheduling
+            # ----------------------------
+            list_submodule_list = split_load(submodules, self.args.jobs)
+            # ----------------------------
 
         #print(list_submodule_list)
 
-        print("Running with " + str(num_jobs) + " threads...")
-        for i in range(num_jobs):
-            t = threading.Thread(target=worker, args=(list_submodule_list[i], self.args.path, self.args.command, self.__counter,))
+        print("Running with " + str(self.args.jobs) + " threads using " + self.args.schedule + " strategy...")
+        for i in range(self.args.jobs):
+            if self.args.schedule == "load-share":
+                t = threading.Thread(target=worker,
+                                     args=(scheduler, self.args.path, self.args.command, self.__counter,))
+            else:
+                t = threading.Thread(target=worker,
+                                     args=(list_submodule_list[i], self.args.path, self.args.command, self.__counter,))
             self.__threads.append(t)
             t.start()
 
-        for i in range(num_jobs):
+        for i in range(self.args.jobs):
             self.__threads[i].join()
 
         print("\nExecution complete!")
