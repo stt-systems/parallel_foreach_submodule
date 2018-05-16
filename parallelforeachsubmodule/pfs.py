@@ -102,7 +102,7 @@ class PFS(object):
         for i in range(num_jobs):
             self.__threads[i].join()
 
-        print("Execution complete!")
+        print("\nExecution complete!")
         print("--- %s seconds ---" % (time.time() - start_time))
 
 
