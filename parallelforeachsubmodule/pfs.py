@@ -39,7 +39,13 @@ class PFS(object):
                             choices=['CHUNK', 'LOAD-SHARE'],
                             type=lambda s: s.upper())
         parser.add_argument('-j', '--jobs', dest='jobs',
-                                      help='Number of concurrent jobs. Use -j 0 to use automatically the best maximum number of jobs', type=self.valid_jobs, default=2)
+                            help='Number of concurrent jobs. Use -j 0 to use automatically the best maximum number of jobs',
+                            type=self.valid_jobs, default=2)
+        self.__cmd_alias = {
+           'pull': 'git pull origin'
+        }
+        parser.add_argument('--pull', dest='pull', action='store_true',
+                            help='Shortcut to "git pull origin"')
         self.args = parser.parse_args()
 
         self.__submodule_path_pattern = re.compile('path ?= ?([A-za-z0-9-_]+)(\/[A-za-z0-9-_]+)*([A-za-z0-9-_])')
@@ -102,13 +108,16 @@ class PFS(object):
         #print(list_submodule_list)
 
         print("Running with " + str(self.args.jobs) + " threads using " + self.args.schedule + " strategy...")
+        command = self.args.command
+        if self.args.pull:
+            command = self.__cmd_alias["pull"]
         for i in range(self.args.jobs):
             if self.args.schedule == "load-share":
                 t = threading.Thread(target=worker,
-                                     args=(scheduler, self.args.path, self.args.command, self.__counter,))
+                                     args=(scheduler, self.args.path, command, self.__counter,))
             else:
                 t = threading.Thread(target=worker,
-                                     args=(list_submodule_list[i], self.args.path, self.args.command, self.__counter,))
+                                     args=(list_submodule_list[i], self.args.path, command, self.__counter,))
             self.__threads.append(t)
             t.start()
 
