@@ -38,3 +38,10 @@ $ pfs -p "D:\project" -c "git pull origin" -j 8
 ```
 
 The example executes command `git pull origin` for each submdoule in `D:\project` using 8 threads.
+
+
+### Shortcuts
+
+List of shortcuts or aliases to write faster some usual operations
+
+* `pfs --pull` ~ `pfs -c "git pull origin"`
