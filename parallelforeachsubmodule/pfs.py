@@ -113,7 +113,11 @@ class PFS(object):
         command = self.args.command
         if self.args.pull:
             command = self.__cmd_alias["pull"]
-        self.empty_cmd(command)
+        try:
+            self.empty_cmd(command)
+        except argparse.ArgumentTypeError as e:
+            print(e)
+            exit(0)
 
         for i in range(self.args.jobs):
             if self.args.schedule == "load-share":
