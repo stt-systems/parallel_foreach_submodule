@@ -20,14 +20,15 @@ class PFSProcess(object):
         self.__p = sub.Popen(self.__cmd, stdout=sub.PIPE, stderr=sub.PIPE, shell=True,
                              cwd=os.path.join(self.__path, self.__submodule))
 
-        if self.__output_filter == "":
-            self.__output += self.__p.communicate()[0].decode('utf-8')  # stdoutdata
-        else:
-            if str(self.__p.communicate()[0].decode('utf-8')).find(self.__output_filter) == -1:
-                self.__output += self.__p.communicate()[0].decode('utf-8')
+        self.__output += self.__p.communicate()[0].decode('utf-8')  # stdoutdata
 
         if self.__p.communicate()[1]:  # stderrdata
             self.__output += self.__p.communicate()[1].decode('utf-8')
 
         self.__output += str(self.__counter.increment_value())
-        print(self.__output)
+
+        if self.__output_filter == "":
+            print(self.__output)
+        else:
+            if str(self.__output).find(self.__output_filter) == -1:
+                print(self.__output)
