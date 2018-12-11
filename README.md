@@ -46,3 +46,10 @@ List of shortcuts or aliases to write faster some usual operations
 
 * `pfs --pull` ~ `pfs -c "git pull origin"`
 * `pfs --status` ~ `pfs -c "git status"` (only show repositories with changes)
+
+
+### Help
+
+Run the following command to see all options available:
+
+`pfs --help` or ` pfs -h`
