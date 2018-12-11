@@ -13,13 +13,13 @@ import time
 import multiprocessing
 
 
-def worker(submodule_list, path, command, counter):
+def worker(submodule_list, path, command, counter, output_filter=""):
     if isinstance(submodule_list, Scheduler):
         while not submodule_list.empty():
-            PFSProcess(submodule_list.get(), path, command, counter).run()
+            PFSProcess(submodule_list.get(), path, command, counter, output_filter).run()
     else:
         for submodule in submodule_list:
-            PFSProcess(submodule, path, command, counter).run()
+            PFSProcess(submodule, path, command, counter, output_filter).run()
 
 
 class PFS(object):
@@ -43,7 +43,7 @@ class PFS(object):
                             help='Number of concurrent jobs. Use -j 0 to use automatically the best maximum number of jobs',
                             type=self.valid_jobs, default=2)
         self.__cmd_alias = {
-           'pull': 'git pull origin'
+           'pull': ('git pull origin', 'nothing to commit')
         }
         parser.add_argument('--pull', dest='pull', action='store_true',
                             help='Shortcut to "git pull origin"')
@@ -111,8 +111,10 @@ class PFS(object):
         print("Running with " + str(self.args.jobs) + " threads using " + self.args.schedule + " strategy...")
 
         command = self.args.command
+        output_filter = ""
         if self.args.pull:
-            command = self.__cmd_alias["pull"]
+            command = self.__cmd_alias["pull"][0]
+            output_filter = self.__cmd_alias["pull"][1]
         try:
             self.empty_cmd(command)
         except argparse.ArgumentTypeError as e:
@@ -122,10 +124,10 @@ class PFS(object):
         for i in range(self.args.jobs):
             if self.args.schedule == "load-share":
                 t = threading.Thread(target=worker,
-                                     args=(scheduler, self.args.path, command, self.__counter,))
+                                     args=(scheduler, self.args.path, command, self.__counter, output_filter,))
             else:
                 t = threading.Thread(target=worker,
-                                     args=(list_submodule_list[i], self.args.path, command, self.__counter,))
+                                     args=(list_submodule_list[i], self.args.path, command, self.__counter, output_filter,))
             self.__threads.append(t)
             t.start()
 
