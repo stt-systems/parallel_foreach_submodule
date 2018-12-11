@@ -43,10 +43,13 @@ class PFS(object):
                             help='Number of concurrent jobs. Use -j 0 to use automatically the best maximum number of jobs',
                             type=self.valid_jobs, default=2)
         self.__cmd_alias = {
-            'pull': ('git pull origin', '')
+            'pull': ('git pull origin', ''),
+            'status': ('git status', 'nothing to commit'),
         }
         parser.add_argument('--pull', dest='pull', action='store_true',
                             help='Shortcut to "git pull origin"')
+        parser.add_argument('--status', dest='status', action='store_true',
+                            help='Shortcut to "git status"')
         self.args = parser.parse_args()
 
         self.__submodule_path_pattern = re.compile('path ?= ?([A-za-z0-9-_]+)(\/[A-za-z0-9-_]+)*([A-za-z0-9-_])')
@@ -115,6 +118,9 @@ class PFS(object):
         if self.args.pull:
             command = self.__cmd_alias["pull"][0]
             output_filter = self.__cmd_alias["pull"][1]
+        if self.args.status:
+            command = self.__cmd_alias["status"][0]
+            output_filter = self.__cmd_alias["status"][1]
         try:
             self.empty_cmd(command)
         except argparse.ArgumentTypeError as e:
