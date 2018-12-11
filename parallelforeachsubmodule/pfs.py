@@ -34,7 +34,8 @@ class PFS(object):
         parser.add_argument('-p', '--path', dest='path', help='System path where execution starts',
                             type=self.exists_path, default=".")
         parser.add_argument('-c', '--command', dest='command', help='Command to execute',
-                            type=self.empty_cmd, default="")
+                            # type=self.empty_cmd,
+                            default="")
         parser.add_argument('-s', '--schedule', dest='schedule', help='Scheduling strategy', default='load-share',
                             choices=['CHUNK', 'LOAD-SHARE'],
                             type=lambda s: s.upper())
@@ -108,9 +109,12 @@ class PFS(object):
         #print(list_submodule_list)
 
         print("Running with " + str(self.args.jobs) + " threads using " + self.args.schedule + " strategy...")
+
         command = self.args.command
         if self.args.pull:
             command = self.__cmd_alias["pull"]
+        self.empty_cmd(command)
+
         for i in range(self.args.jobs):
             if self.args.schedule == "load-share":
                 t = threading.Thread(target=worker,
