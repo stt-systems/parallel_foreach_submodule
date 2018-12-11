@@ -23,7 +23,7 @@ class PFSProcess(object):
         if self.__output_filter == "":
             self.__output += self.__p.communicate()[0].decode('utf-8')  # stdoutdata
         else:
-            if str(self.__p.communicate()[0].decode('utf-8')).find(self.__output_filter) != -1:
+            if str(self.__p.communicate()[0].decode('utf-8')).find(self.__output_filter) == -1:
                 self.__output += self.__p.communicate()[0].decode('utf-8')
 
         if self.__p.communicate()[1]:  # stderrdata
