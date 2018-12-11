@@ -43,7 +43,7 @@ class PFS(object):
                             help='Number of concurrent jobs. Use -j 0 to use automatically the best maximum number of jobs',
                             type=self.valid_jobs, default=2)
         self.__cmd_alias = {
-           'pull': ('git pull origin', 'nothing to commit')
+            'pull': ('git pull origin', '')
         }
         parser.add_argument('--pull', dest='pull', action='store_true',
                             help='Shortcut to "git pull origin"')
