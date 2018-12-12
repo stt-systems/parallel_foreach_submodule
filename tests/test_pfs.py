@@ -5,6 +5,7 @@ import subprocess as sub
 import os
 
 
+# https://stackoverflow.com/questions/36169571/python-subprocess-check-call-vs-check-output
 def git(*args):
     return sub.check_call(['git'] + list(args))
 
