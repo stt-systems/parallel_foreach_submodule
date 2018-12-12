@@ -5,3 +5,5 @@ dist
 build
 pfs.egg-info
 pfs.spec
+tests/tmp/*
+!tests/tmp/dummy.txt
