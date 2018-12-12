@@ -7,3 +7,4 @@ pfs.egg-info
 pfs.spec
 tests/tmp/*
 !tests/tmp/dummy.txt
+**_trial_temp*/
