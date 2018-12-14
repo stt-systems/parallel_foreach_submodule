@@ -24,8 +24,12 @@ class TestPFS(unittest.TestCase):
             os.system("rm - rf " + os.path.dirname(os.path.abspath(__file__)) + "/tmp/git_submodules_test_project")
 
     def test_command(self):
-        print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__))+'\\tmp\\git_submodules_test_project' +
-                        ' && pfs -c "git checkout master"'))
+        if os.name == 'nt':  # on windows
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__))+'\\tmp\\git_submodules_test_project' +
+                            ' && pfs -c "git checkout master"'))
+        else:  # on linux / os x
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '/tmp/git_submodules_test_project' +
+                            ' && pfs -c "git checkout master"'))
 
 
 if __name__ == '__main__':
