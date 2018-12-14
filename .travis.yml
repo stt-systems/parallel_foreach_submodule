@@ -9,7 +9,7 @@ python:
 install:
   - pwd
   - pip install .
-  - pip install pytest
+  - pip install "pytest>=3.10.0"
 # command to run tests
 script:
 - pwd
