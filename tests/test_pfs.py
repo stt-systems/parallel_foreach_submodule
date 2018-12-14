@@ -15,17 +15,17 @@ class TestPFS(unittest.TestCase):
     def setUp(self):
         print(sub.check_call(['pfs', '--help']))
         git("clone", "https://github.com/RDCH106/git_submodules_test_project.git",
-            os.path.dirname(os.path.abspath(__file__))+"/tmp/git_submodules_test_project", "--recursive")
+            os.path.dirname(os.path.abspath(__file__)) + "/tmp/git_submodules_test_project", "--recursive")
 
     def tearDown(self):
         if os.name == 'nt':  # on windows
-            os.system("rmdir /s /q " + os.path.dirname(os.path.abspath(__file__))+"\\tmp\\git_submodules_test_project")
+            os.system("rmdir /s /q " + os.path.dirname(os.path.abspath(__file__)) + "\\tmp\\git_submodules_test_project")
         else:  # on linux / os x
             os.system("rm - rf " + os.path.dirname(os.path.abspath(__file__)) + "/tmp/git_submodules_test_project")
 
     def test_command(self):
         if os.name == 'nt':  # on windows
-            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__))+'\\tmp\\git_submodules_test_project' +
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '\\tmp\\git_submodules_test_project' +
                             ' && pfs -c "git checkout master"'))
         else:  # on linux / os x
             print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '/tmp/git_submodules_test_project' +
@@ -35,7 +35,7 @@ class TestPFS(unittest.TestCase):
         if os.name == 'nt':  # on windows
             print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '\\tmp\\git_submodules_test_project' +
                             ' && pfs -c "git checkout master"'))
-            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__))+'\\tmp\\git_submodules_test_project' +
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '\\tmp\\git_submodules_test_project' +
                             ' && pfs --pull'))
         else:  # on linux / os x
             print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '/tmp/git_submodules_test_project' +
@@ -50,7 +50,7 @@ class TestPFS(unittest.TestCase):
                             ' && type nul > change.txt'))
             print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '\\tmp\\git_submodules_test_project' +
                             ' && pfs -c "git checkout master"'))
-            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__))+'\\tmp\\git_submodules_test_project' +
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '\\tmp\\git_submodules_test_project' +
                             ' && pfs --status'))
         else:  # on linux / os x
             print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) +
