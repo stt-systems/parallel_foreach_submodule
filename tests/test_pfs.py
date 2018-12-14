@@ -31,6 +31,18 @@ class TestPFS(unittest.TestCase):
             print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '/tmp/git_submodules_test_project' +
                             ' && pfs -c "git checkout master"'))
 
+    def test_pull_shortcut(self):
+        if os.name == 'nt':  # on windows
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '\\tmp\\git_submodules_test_project' +
+                            ' && pfs -c "git checkout master"'))
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__))+'\\tmp\\git_submodules_test_project' +
+                            ' && pfs --pull'))
+        else:  # on linux / os x
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '/tmp/git_submodules_test_project' +
+                            ' && pfs -c "git checkout master"'))
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '/tmp/git_submodules_test_project' +
+                            ' && pfs --pull'))
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
