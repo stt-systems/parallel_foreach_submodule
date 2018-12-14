@@ -43,6 +43,24 @@ class TestPFS(unittest.TestCase):
             print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '/tmp/git_submodules_test_project' +
                             ' && pfs --pull'))
 
+    def test_status_shortcut(self):
+        if os.name == 'nt':  # on windows
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) +
+                            '\\tmp\\git_submodules_test_project\\submodules\\linearizator' +
+                            ' && type nul > change.txt'))
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '\\tmp\\git_submodules_test_project' +
+                            ' && pfs -c "git checkout master"'))
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__))+'\\tmp\\git_submodules_test_project' +
+                            ' && pfs --status'))
+        else:  # on linux / os x
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) +
+                            '\\tmp\\git_submodules_test_project\\submodules\\linearizator' +
+                            ' && touch change.txt'))
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '/tmp/git_submodules_test_project' +
+                            ' && pfs -c "git checkout master"'))
+            print(os.system('cd ' + os.path.dirname(os.path.abspath(__file__)) + '/tmp/git_submodules_test_project' +
+                            ' && pfs --status'))
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
