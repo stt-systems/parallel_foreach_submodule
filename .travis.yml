@@ -14,4 +14,4 @@ install:
 script:
 - pwd
 - pfs -h
-- pytest tests/test_pfs.py
+- pytest -v tests/test_pfs.py
