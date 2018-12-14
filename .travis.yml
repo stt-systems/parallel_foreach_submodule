@@ -9,7 +9,9 @@ python:
 install:
   - pwd
   - pip install .
+  - pip install pytest
 # command to run tests
 script:
 - pwd
 - pfs -h
+- pytest tests/test_pfs.py
