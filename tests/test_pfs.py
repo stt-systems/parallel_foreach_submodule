@@ -13,6 +13,7 @@ def git(*args):
 class TestPFS(unittest.TestCase):
 
     def setUp(self):
+        print(sub.check_call(['pfs', '--version']))
         print(sub.check_call(['pfs', '--help']))
         git("clone", "https://github.com/RDCH106/git_submodules_test_project.git",
             os.path.dirname(os.path.abspath(__file__)) + "/tmp/git_submodules_test_project", "--recursive")
