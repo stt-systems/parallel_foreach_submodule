@@ -58,11 +58,11 @@ class TestPFS(unittest.TestCase):
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                    '\\tmp\\git_submodules_test_project' + ' && pfs -c "git checkout master"',
                                    shell=True))
-            print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) + '\\tmp\\git_submodules_test_project' +
-                                   ' && pfs --status', shell=True))
+            print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
+                                   '\\tmp\\git_submodules_test_project' + ' && pfs --status', shell=True))
         else:  # on linux / os x
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
-                                   '\\tmp\\git_submodules_test_project\\submodules\\linearizator' +
+                                   '/tmp/git_submodules_test_project/submodules/linearizator' +
                                    ' && touch change.txt', shell=True))
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                    '/tmp/git_submodules_test_project' + ' && pfs -c "git checkout master"',
