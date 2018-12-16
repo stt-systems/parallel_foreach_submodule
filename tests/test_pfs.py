@@ -22,6 +22,7 @@ class TestPFS(unittest.TestCase):
             os.system("rmdir /s /q " + os.path.dirname(os.path.abspath(__file__)) + "\\tmp\\git_submodules_test_project")
         else:  # on linux / os x
             os.system("rm - rf " + os.path.dirname(os.path.abspath(__file__)) + "/tmp/git_submodules_test_project")
+            os.system("rm - rf " + os.path.dirname(os.path.abspath(__file__)) + "/tmp/git_submodules_test_project/.git")
 
     def test_command(self):
         if os.name == 'nt':  # on windows
