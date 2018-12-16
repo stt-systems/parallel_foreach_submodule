@@ -28,47 +28,49 @@ class TestPFS(unittest.TestCase):
         if os.name == 'nt':  # on windows
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                    '\\tmp\\git_submodules_test_project' + ' && pfs -c "git checkout master"',
-                                   shell=True))
+                                   shell=True).decode('utf-8'))
         else:  # on linux / os x
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                    '/tmp/git_submodules_test_project' + ' && pfs -c "git checkout master"',
-                                   shell=True))
+                                   shell=True).decode('utf-8'))
 
     def test_pull_shortcut(self):
         if os.name == 'nt':  # on windows
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                    '\\tmp\\git_submodules_test_project' + ' && pfs -c "git checkout master"',
-                                   shell=True))
+                                   shell=True).decode('utf-8'))
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                    '\\tmp\\git_submodules_test_project' + ' && pfs --pull',
-                                   shell=True))
+                                   shell=True).decode('utf-8'))
         else:  # on linux / os x
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                    '/tmp/git_submodules_test_project' + ' && pfs -c "git checkout master"',
-                                   shell=True))
+                                   shell=True).decode('utf-8'))
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                    '/tmp/git_submodules_test_project' + ' && pfs --pull',
-                                   shell=True))
+                                   shell=True).decode('utf-8'))
 
     def test_status_shortcut(self):
         if os.name == 'nt':  # on windows
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                    '\\tmp\\git_submodules_test_project\\submodules\\linearizator' +
-                                   ' && type nul > change.txt',shell=True))
+                                   ' && type nul > change.txt', shell=True).decode('utf-8'))
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                    '\\tmp\\git_submodules_test_project' + ' && pfs -c "git checkout master"',
-                                   shell=True))
+                                   shell=True).decode('utf-8'))
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
-                                   '\\tmp\\git_submodules_test_project' + ' && pfs --status', shell=True))
+                                   '\\tmp\\git_submodules_test_project' + ' && pfs --status',
+                                   shell=True).decode('utf-8'))
         else:  # on linux / os x
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                    '/tmp/git_submodules_test_project/submodules/linearizator' +
-                                   ' && touch change.txt', shell=True))
+                                   ' && touch change.txt', shell=True).decode('utf-8'))
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                    '/tmp/git_submodules_test_project' + ' && pfs -c "git checkout master"',
-                                   shell=True))
+                                   shell=True).decode('utf-8'))
             print(sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
-                                   '/tmp/git_submodules_test_project' + ' && pfs --status', shell=True))
+                                   '/tmp/git_submodules_test_project' + ' && pfs --status',
+                                   shell=True).decode('utf-8'))
 
 
 if __name__ == '__main__':
