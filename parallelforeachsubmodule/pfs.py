@@ -50,6 +50,8 @@ class PFS(object):
                             help='Shortcut to "git pull origin"')
         parser.add_argument('--status', dest='status', action='store_true',
                             help='Shortcut to "git status"')
+        parser.add_argument('--verbose', dest='verbose', action='store_true',
+                            help='Verbose option in shortcuts"')
         self.args = parser.parse_args()
 
         self.__submodule_path_pattern = re.compile('path ?= ?([A-za-z0-9-_]+)(\/[A-za-z0-9-_]+)*([A-za-z0-9-_])')
@@ -117,10 +119,12 @@ class PFS(object):
         output_filter = ""
         if self.args.pull:
             command = self.__cmd_alias["pull"][0]
-            output_filter = self.__cmd_alias["pull"][1]
+            if not self.args.verbose:
+                output_filter = self.__cmd_alias["pull"][1]
         if self.args.status:
             command = self.__cmd_alias["status"][0]
-            output_filter = self.__cmd_alias["status"][1]
+            if not self.args.verbose:
+                output_filter = self.__cmd_alias["status"][1]
         try:
             self.empty_cmd(command)
         except argparse.ArgumentTypeError as e:
