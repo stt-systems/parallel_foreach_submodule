@@ -41,14 +41,14 @@ class TestPFS(unittest.TestCase):
                                         '\\tmp\\git_submodules_test_project' + ' && pfs -c "git checkout master"',
                                         shell=True).decode('utf-8'))
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
-                                        '\\tmp\\git_submodules_test_project' + ' && pfs --pull',
+                                        '\\tmp\\git_submodules_test_project' + ' && pfs --pull --verbose',
                                         shell=True).decode('utf-8'))
         else:  # on linux / os x
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                         '/tmp/git_submodules_test_project' + ' && pfs -c "git checkout master"',
                                         shell=True).decode('utf-8'))
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
-                                        '/tmp/git_submodules_test_project' + ' && pfs --pull',
+                                        '/tmp/git_submodules_test_project' + ' && pfs --pull --verbose',
                                         shell=True).decode('utf-8'))
 
     def test_status_shortcut(self):
@@ -60,7 +60,7 @@ class TestPFS(unittest.TestCase):
                                         '\\tmp\\git_submodules_test_project' + ' && pfs -c "git checkout master"',
                                         shell=True).decode('utf-8'))
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
-                                        '\\tmp\\git_submodules_test_project' + ' && pfs --status',
+                                        '\\tmp\\git_submodules_test_project' + ' && pfs --status --verbose',
                                         shell=True).decode('utf-8'))
         else:  # on linux / os x
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
@@ -70,7 +70,7 @@ class TestPFS(unittest.TestCase):
                                         '/tmp/git_submodules_test_project' + ' && pfs -c "git checkout master"',
                                         shell=True).decode('utf-8'))
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
-                                        '/tmp/git_submodules_test_project' + ' && pfs --status',
+                                        '/tmp/git_submodules_test_project' + ' && pfs --status --verbose',
                                         shell=True).decode('utf-8'))
 
 
