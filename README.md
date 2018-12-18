@@ -45,7 +45,9 @@ The example executes command `git pull origin` for each submdoule in `D:\project
 List of shortcuts or aliases to write faster some usual operations
 
 * `pfs --pull` ~ `pfs -c "git pull origin"`
-* `pfs --status` ~ `pfs -c "git status"` (only show repositories with changes)
+* `pfs --status` ~ `pfs -c "git status"` 
+
+⚠️ Shortcuts only show repositories affected with changes
 
 
 ### Help
