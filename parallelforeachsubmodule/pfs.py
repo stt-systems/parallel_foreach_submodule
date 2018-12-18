@@ -51,7 +51,7 @@ class PFS(object):
         parser.add_argument('--status', dest='status', action='store_true',
                             help='Shortcut to "git status"')
         parser.add_argument('--verbose', dest='verbose', action='store_true',
-                            help='Verbose option in shortcuts"')
+                            help='Verbose option in shortcuts')
         self.args = parser.parse_args()
 
         self.__submodule_path_pattern = re.compile('path ?= ?([A-za-z0-9-_]+)(\/[A-za-z0-9-_]+)*([A-za-z0-9-_])')
