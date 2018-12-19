@@ -126,17 +126,17 @@ class PFS(object):
             command = self.__cmd_alias["pull"][0]
             if not self.args.verbose:
                 output_filter = self.__cmd_alias["pull"][1]
-                command_function = self.__cmd_alias["pull"][2]
+            command_function = self.__cmd_alias["pull"][2]
         if self.args.status:
             command = self.__cmd_alias["status"][0]
             if not self.args.verbose:
                 output_filter = self.__cmd_alias["status"][1]
-                command_function = self.__cmd_alias["status"][2]
+            command_function = self.__cmd_alias["status"][2]
         if self.args.pending:
             command = self.__cmd_alias["pending"][0]
             if not self.args.verbose:
                 output_filter = self.__cmd_alias["pending"][1]
-                command_function = self.__cmd_alias["pending"][2]
+            command_function = self.__cmd_alias["pending"][2]
         try:
             self.empty_cmd(command)
         except argparse.ArgumentTypeError as e:
