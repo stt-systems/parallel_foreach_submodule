@@ -22,6 +22,7 @@ class PFSProcess(object):
         return sub.check_output(['git', '-C', path, 'rev-parse', '--abbrev-ref', 'HEAD']).decode('utf-8')
 
     def run(self):
+        is_empty = True
         self.__output = "\n\n" + self.__submodule + "\n"
         # self.__output = sub.check_output(self.__cmd)
         if self.__cmd_func:
@@ -29,8 +30,11 @@ class PFSProcess(object):
         self.__p = sub.Popen(self.__cmd, stdout=sub.PIPE, stderr=sub.PIPE, shell=True,
                              cwd=os.path.join(self.__path, self.__submodule))
 
-        if self.__p.communicate()[0].decode('utf-8') != '\n':
+        #print(self.__cmd)
+        #print(self.__p.communicate()[0].decode('utf-8'))
+        if self.__p.communicate()[0].decode('utf-8') != '':
             self.__output += self.__p.communicate()[0].decode('utf-8')  # stdoutdata
+            is_empty = False
 
         if self.__p.communicate()[1]:  # stderrdata
             self.__output += self.__p.communicate()[1].decode('utf-8')
@@ -40,5 +44,7 @@ class PFSProcess(object):
         if self.__output_filter == "":
             print(self.__output)
         else:
-            if str(self.__output).find(self.__output_filter) == -1:
+            if str(self.__output).find(self.__output_filter) == -1 and self.__output_filter != '@<empty>@' \
+                    or (str(self.__output).find(self.__output_filter) == -1
+                        and self.__output_filter == '@<empty>@' and not is_empty):
                 print(self.__output)
