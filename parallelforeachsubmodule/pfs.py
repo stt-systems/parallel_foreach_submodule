@@ -13,13 +13,13 @@ import time
 import multiprocessing
 
 
-def worker(submodule_list, path, command, counter, output_filter=""):
+def worker(submodule_list, path, command, counter, output_filter="", cmd_func=None):
     if isinstance(submodule_list, Scheduler):
         while not submodule_list.empty():
-            PFSProcess(submodule_list.get(), path, command, counter, output_filter).run()
+            PFSProcess(submodule_list.get(), path, command, counter, output_filter, cmd_func).run()
     else:
         for submodule in submodule_list:
-            PFSProcess(submodule, path, command, counter, output_filter).run()
+            PFSProcess(submodule, path, command, counter, output_filter, cmd_func).run()
 
 
 class PFS(object):
@@ -43,11 +43,15 @@ class PFS(object):
                             help='Number of concurrent jobs. Use -j 0 to use automatically the best maximum number of jobs',
                             type=self.valid_jobs, default=2)
         self.__cmd_alias = {
-            'pull': ('git pull origin', 'Already up to date'),
-            'status': ('git status', 'nothing to commit'),
+            'pull': ('git pull origin', 'Already up to date', None),
+            'status': ('git status', 'nothing to commit', None),
+            'pending': ('git log origin/@Abranch@..@Abranch@', '@<empty>@',
+                        lambda cmd, tag_value: str(cmd).replace('@Abranch@', tag_value, 2)),
         }
         parser.add_argument('--pull', dest='pull', action='store_true',
                             help='Shortcut to "git pull origin"')
+        parser.add_argument('--pending', dest='pending', action='store_true',
+                            help='Shortcut to "git log <since origin/current>..<until current>"')
         parser.add_argument('--status', dest='status', action='store_true',
                             help='Shortcut to "git status"')
         parser.add_argument('--verbose', dest='verbose', action='store_true',
@@ -117,14 +121,22 @@ class PFS(object):
 
         command = self.args.command
         output_filter = ""
+        command_function = None
         if self.args.pull:
             command = self.__cmd_alias["pull"][0]
             if not self.args.verbose:
                 output_filter = self.__cmd_alias["pull"][1]
+                command_function = self.__cmd_alias["pull"][2]
         if self.args.status:
             command = self.__cmd_alias["status"][0]
             if not self.args.verbose:
                 output_filter = self.__cmd_alias["status"][1]
+                command_function = self.__cmd_alias["status"][2]
+        if self.args.pending:
+            command = self.__cmd_alias["pending"][0]
+            if not self.args.verbose:
+                output_filter = self.__cmd_alias["pending"][1]
+                command_function = self.__cmd_alias["pending"][2]
         try:
             self.empty_cmd(command)
         except argparse.ArgumentTypeError as e:
@@ -134,10 +146,12 @@ class PFS(object):
         for i in range(self.args.jobs):
             if self.args.schedule == "load-share":
                 t = threading.Thread(target=worker,
-                                     args=(scheduler, self.args.path, command, self.__counter, output_filter,))
+                                     args=(scheduler, self.args.path, command, self.__counter,
+                                           output_filter, command_function,))
             else:
                 t = threading.Thread(target=worker,
-                                     args=(list_submodule_list[i], self.args.path, command, self.__counter, output_filter,))
+                                     args=(list_submodule_list[i], self.args.path, command, self.__counter,
+                                           output_filter, command_function,))
             self.__threads.append(t)
             t.start()
 
