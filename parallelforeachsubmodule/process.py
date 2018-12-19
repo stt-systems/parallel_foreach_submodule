@@ -5,7 +5,7 @@ import os
 
 
 class PFSProcess(object):
-    def __init__(self, submodule, path, cmd, counter, output_filter=""):
+    def __init__(self, submodule, path, cmd, counter, output_filter="", cmd_func=None):
         self.__submodule = submodule
         self.__path = path
         self.__cwd = os.path.join(self.__path, self.__submodule)
@@ -24,6 +24,8 @@ class PFSProcess(object):
     def run(self):
         self.__output = "\n\n" + self.__submodule + "\n"
         # self.__output = sub.check_output(self.__cmd)
+        if self.__cmd_func:
+            self.__cmd = self.__cmd_func(self.__cmd, self.__active_branch)
         self.__p = sub.Popen(self.__cmd, stdout=sub.PIPE, stderr=sub.PIPE, shell=True,
                              cwd=os.path.join(self.__path, self.__submodule))
 
