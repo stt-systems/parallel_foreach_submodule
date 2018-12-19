@@ -11,8 +11,13 @@ class PFSProcess(object):
         self.__cmd = cmd
         self.__counter = counter
         self.__output_filter = output_filter
+        self.__active_branch = self.get_current_branch()[:-1]
         self.__output = None
         self.__p = None
+
+    @staticmethod
+    def get_current_branch():
+        return sub.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).decode('utf-8')
 
     def run(self):
         self.__output = "\n\n" + self.__submodule + "\n"
