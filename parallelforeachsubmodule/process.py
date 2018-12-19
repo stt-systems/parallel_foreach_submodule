@@ -29,7 +29,8 @@ class PFSProcess(object):
         self.__p = sub.Popen(self.__cmd, stdout=sub.PIPE, stderr=sub.PIPE, shell=True,
                              cwd=os.path.join(self.__path, self.__submodule))
 
-        self.__output += self.__p.communicate()[0].decode('utf-8')  # stdoutdata
+        if self.__p.communicate()[0].decode('utf-8') != '\n':
+            self.__output += self.__p.communicate()[0].decode('utf-8')  # stdoutdata
 
         if self.__p.communicate()[1]:  # stderrdata
             self.__output += self.__p.communicate()[1].decode('utf-8')
