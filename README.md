@@ -46,6 +46,7 @@ List of shortcuts or aliases to write faster some usual operations
 
 * `pfs --pull` ~ `pfs -c "git pull origin"`
 * `pfs --status` ~ `pfs -c "git status"` 
+* `pfs --pending` ~ `pfs -c "git log <since origin/current>..<until current>"`
 
 ⚠️ Shortcuts only show repositories affected with changes
 
