@@ -98,10 +98,10 @@ class TestPFS(unittest.TestCase):
                                         '/tmp/git_submodules_test_project/submodules/linearizator' +
                                         ' && touch change.txt', shell=True).decode('utf-8'))
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
-                                        '\\tmp\\git_submodules_test_project\\submodules\\linearizator' +
+                                        '/tmp/git_submodules_test_project/submodules/linearizator' +
                                         ' && git add -A', shell=True).decode('utf-8'))
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
-                                        '\\tmp\\git_submodules_test_project\\submodules\\linearizator' +
+                                        '/tmp/git_submodules_test_project/submodules/linearizator' +
                                         ' && git commit -m "test_pending_shortcut test"', shell=True).decode('utf-8'))
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                         '/tmp/git_submodules_test_project' + ' && pfs --status --verbose',
