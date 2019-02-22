@@ -89,7 +89,7 @@ class TestPFS(unittest.TestCase):
                                         ' && git commit -m "test_pending_shortcut test"', shell=True).decode('utf-8'))
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                         '\\tmp\\git_submodules_test_project' + ' && pfs --pending --verbose',
-                                        shell=True).decode('utf-8'))
+                                        shell=True).decode('latin-1'))
         else:  # on linux / os x
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                         '/tmp/git_submodules_test_project' + ' && pfs -c "git checkout master"',
@@ -105,7 +105,7 @@ class TestPFS(unittest.TestCase):
                                         ' && git commit -m "test_pending_shortcut test"', shell=True).decode('utf-8'))
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
                                         '/tmp/git_submodules_test_project' + ' && pfs --status --verbose',
-                                        shell=True).decode('utf-8'))
+                                        shell=True).decode('latin-1'))
 
 
 if __name__ == '__main__':
