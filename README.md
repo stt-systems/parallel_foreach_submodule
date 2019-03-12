@@ -1,8 +1,8 @@
 # Parallel Foreach Submodule
 
-[![PyPI](https://img.shields.io/pypi/v/pfs.svg)](https://pypi.python.org/pypi/pfs)
-[![PyPI](https://img.shields.io/pypi/pyversions/pfs.svg)](https://pypi.python.org/pypi/pfs)
-[![PyPI](https://img.shields.io/pypi/l/pfs.svg)](https://github.com/RDCH106/parallel_foreach_submodule/blob/master/LICENSE)
+[![PyPI Version](https://img.shields.io/pypi/v/pfs.svg)](https://pypi.python.org/pypi/pfs)
+[![PyPI Compatibility](https://img.shields.io/pypi/pyversions/pfs.svg)](https://pypi.python.org/pypi/pfs)
+[![PyPI License](https://img.shields.io/pypi/l/pfs.svg)](https://github.com/RDCH106/parallel_foreach_submodule/blob/master/LICENSE)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9000e198e34c4f93a8320942e5b8524e)](https://www.codacy.com/app/RDCH106/parallel_foreach_submodule?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RDCH106/parallel_foreach_submodule&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/RDCH106/parallel_foreach_submodule.svg?branch=master)](https://travis-ci.org/RDCH106/parallel_foreach_submodule)
 

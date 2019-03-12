@@ -1,7 +1,8 @@
 Parallel Foreach Submodule
 ==========================
 
-|PyPI| |PyPI| |PyPI| |Codacy Badge| |Build Status|
+|PyPI Version| |PyPI Compatibility| |PyPI License| |Codacy Badge| |Build
+Status|
 
 Parallel Foreach Submodule (PFS) is a tool for "git submodule foreach"
 execution in parallel.
@@ -58,11 +59,11 @@ Run the following command to see all options available:
 
 ``pfs --help`` or ``pfs -h``
 
-.. |PyPI| image:: https://img.shields.io/pypi/v/pfs.svg
+.. |PyPI Version| image:: https://img.shields.io/pypi/v/pfs.svg
    :target: https://pypi.python.org/pypi/pfs
-.. |PyPI| image:: https://img.shields.io/pypi/pyversions/pfs.svg
+.. |PyPI Compatibility| image:: https://img.shields.io/pypi/pyversions/pfs.svg
    :target: https://pypi.python.org/pypi/pfs
-.. |PyPI| image:: https://img.shields.io/pypi/l/pfs.svg
+.. |PyPI License| image:: https://img.shields.io/pypi/l/pfs.svg
    :target: https://github.com/RDCH106/parallel_foreach_submodule/blob/master/LICENSE
 .. |Codacy Badge| image:: https://api.codacy.com/project/badge/Grade/9000e198e34c4f93a8320942e5b8524e
    :target: https://www.codacy.com/app/RDCH106/parallel_foreach_submodule?utm_source=github.com&utm_medium=referral&utm_content=RDCH106/parallel_foreach_submodule&utm_campaign=Badge_Grade
