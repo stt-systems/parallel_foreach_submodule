@@ -1,5 +1,6 @@
 from setuptools import setup
 from parallelforeachsubmodule.metadata import Metadata
+from io import open
 
 metadata = Metadata()
 with open("README.md2rst", "r", encoding="utf-8") as rst_file:
