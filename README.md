@@ -8,6 +8,10 @@
 
 Parallel Foreach Submodule (PFS) is a tool for "git submodule foreach" execution in parallel.
 
+The origin of the tool is the following question in Stack Overflow:
+
+👀 [Execute “git submodule foreach” in parallel](https://stackoverflow.com/a/50178665/9739532)
+
 
 ### What can I do with PFS?
 
