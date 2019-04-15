@@ -3,7 +3,7 @@ from parallelforeachsubmodule.metadata import Metadata
 from io import open
 
 metadata = Metadata()
-with open("README.md2rst", "r", encoding="utf-8") as rst_file:
+with open("README.md", "r", encoding="utf-8") as rst_file:
     long_description = rst_file.read()
 
 
@@ -25,6 +25,7 @@ setup(
     version=metadata.get_version(),
     license='LGPL v3',
     description='Tool for "git submodule foreach" execution in parallel ',
+    long_description_content_type="text/markdown",
     long_description=long_description,
     author=metadata.get_author(),
     author_email='contact@rdch106.hol.es',
