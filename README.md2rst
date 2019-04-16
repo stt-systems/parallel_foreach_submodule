@@ -4,8 +4,13 @@ Parallel Foreach Submodule
 |PyPI Version| |PyPI Compatibility| |PyPI License| |Codacy Badge| |Build
 Status|
 
-Parallel Foreach Submodule (PFS) is a tool for "git submodule foreach"
+Parallel Foreach Submodule (PFS) is a tool for “git submodule foreach”
 execution in parallel.
+
+The origin of the tool is the following question in Stack Overflow:
+
+👀 `Execute “git submodule foreach” in
+parallel <https://stackoverflow.com/a/50178665/9739532>`__
 
 What can I do with PFS?
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -25,16 +30,16 @@ Or you can install from source with:
 
 .. code:: bash
 
-    $ git clone https://github.com/RDCH106/parallel_foreach_submodule.git --recursive
-    $ cd parallel_foreach_submodule
-    $ pip install .
+   $ git clone https://github.com/RDCH106/parallel_foreach_submodule.git --recursive
+   $ cd parallel_foreach_submodule
+   $ pip install .
 
 Quick example
 ~~~~~~~~~~~~~
 
 .. code:: bash
 
-    $ pfs -p "D:\project" -c "git pull origin" -j 8
+   $ pfs -p "D:\project" -c "git pull origin" -j 8
 
 The example executes command ``git pull origin`` for each submdoule in
 ``D:\project`` using 8 threads.
