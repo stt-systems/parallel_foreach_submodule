@@ -6,11 +6,11 @@ python:
   - "3.6"
   - "3.7"
 # Enable 3.7 without globally enabling sudo and dist: trsuty for other build jobs
-matrix:
-  include:
-    - python: 3.3
-      dist: trusty
-      sudo: true
+#matrix:
+#  include:
+#    - python: 3.3
+#      dist: trusty
+#      sudo: true
 # command to install dependencies
 install:
   - pwd
