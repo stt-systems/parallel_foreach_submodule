@@ -15,7 +15,8 @@ matrix:
 install:
   - pwd
   - pip install .
-  - pip install "pytest>=3.10.0"
+  #- pip install "pytest>=3.10.0"
+  #- pip install -r requirements-dev.txt
 # command to run tests
 script:
 - pwd
