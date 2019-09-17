@@ -4,17 +4,12 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
-# Enable 3.3 without globally enabling sudo and dist: trusty for other build jobs
+  - "3.7"
+# Enable 3.7 without globally enabling sudo and dist: trsuty for other build jobs
 matrix:
   include:
     - python: 3.3
       dist: trusty
-      sudo: true
-# Enable 3.7 without globally enabling sudo and dist: xenial for other build jobs
-matrix:
-  include:
-    - python: 3.7
-      dist: xenial
       sudo: true
 # command to install dependencies
 install:
