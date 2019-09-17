@@ -1,21 +1,22 @@
 language: python
 python:
   - "2.7"
-  - "3.3"
   - "3.4"
   - "3.5"
   - "3.6"
-# Enable 3.7 without globally enabling sudo and dist: xenial for other build jobs
-matrix:
-  include:
-    - python: 3.7
-      dist: xenial
-      sudo: true
+  - "3.7"
+# Enable 3.7 without globally enabling sudo and dist: trsuty for other build jobs
+#matrix:
+#  include:
+#    - python: 3.3
+#      dist: trusty
+#      sudo: true
 # command to install dependencies
 install:
   - pwd
   - pip install .
-  - pip install "pytest>=3.10.0"
+  #- pip install "pytest>=3.10.0"
+  - pip install --upgrade -r requirements-dev.txt
 # command to run tests
 script:
 - pwd
