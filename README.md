@@ -59,4 +59,4 @@ List of shortcuts or aliases to write faster some usual operations
 
 Run the following command to see all options available:
 
-`pfs --help` or ` pfs -h`
+`pfs --help` or `pfs -h`
