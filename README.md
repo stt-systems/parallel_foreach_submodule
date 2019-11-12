@@ -29,7 +29,7 @@ You can install or upgrade PFS with:
 Or you can install from source with:
 
 ```bash
-$ git clone https://github.com/RDCH106/parallel_foreach_submodule.git --recursive
+$ git clone https://github.com/stt-systems/parallel_foreach_submodule.git --recursive
 $ cd parallel_foreach_submodule
 $ pip install .
 ```
