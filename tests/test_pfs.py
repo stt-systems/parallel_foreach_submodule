@@ -16,7 +16,7 @@ class TestPFS(unittest.TestCase):
         self.sub = subprocess
         print(self.sub.check_call(['pfs', '--version']))
         print(self.sub.check_call(['pfs', '--help']))
-        git("clone", "https://github.com/RDCH106/git_submodules_test_project.git",
+        git("clone", "https://github.com/stt-systems/git_submodules_test_project.git",
             os.path.dirname(os.path.abspath(__file__)) + "/tmp/git_submodules_test_project", "--recursive")
 
     def tearDown(self):
