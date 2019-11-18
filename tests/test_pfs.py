@@ -104,7 +104,7 @@ class TestPFS(unittest.TestCase):
                                         '/tmp/git_submodules_test_project/submodules/linearizator' +
                                         ' && git commit -m "test_pending_shortcut test"', shell=True).decode('utf-8'))
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
-                                        '/tmp/git_submodules_test_project' + ' && pfs --status --verbose',
+                                        '/tmp/git_submodules_test_project' + ' && pfs --pending --verbose',
                                         shell=True).decode('latin-1'))
 
 
