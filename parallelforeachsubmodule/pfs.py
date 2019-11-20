@@ -42,12 +42,6 @@ class PFS(object):
         parser.add_argument('-j', '--jobs', dest='jobs',
                             help='Number of concurrent jobs. Use -j 0 to use automatically the best maximum number of jobs',
                             type=self.valid_jobs, default=2)
-        self.__cmd_alias = {
-            'pull': ('git pull origin', 'Already up to date', None),
-            'status': ('git status', 'nothing to commit', None),
-            'pending': ('git log origin/@Abranch@..@Abranch@', '@<empty>@',
-                        lambda cmd, tag_value: str(cmd).replace('@Abranch@', tag_value, 2)),
-        }
         parser.add_argument('--pull', dest='pull', action='store_true',
                             help='Shortcut to "git pull origin"')
         parser.add_argument('--pending', dest='pending', action='store_true',
@@ -57,6 +51,13 @@ class PFS(object):
         parser.add_argument('--verbose', dest='verbose', action='store_true',
                             help='Verbose option in shortcuts')
         self.args = parser.parse_args()
+
+        self.__cmd_alias = {
+            'pull': ('git pull origin', 'Already up to date', None, None),
+            'status': ('git status', 'nothing to commit', None, None),
+            'pending': ('git log origin/@Abranch@..@Abranch@', '@<empty>@',
+                        lambda cmd, tag_value: str(cmd).replace('@Abranch@', tag_value, 2), None),
+        }
 
         self.__submodule_path_pattern = re.compile('path ?= ?([A-za-z0-9-_]+)(\/[A-za-z0-9-_]+)*([A-za-z0-9-_])')
         self.__path_pattern = re.compile(' ([A-za-z0-9-_]+)(\/[A-za-z0-9-_]+)*([A-za-z0-9-_])')
