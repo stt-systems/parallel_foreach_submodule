@@ -57,6 +57,12 @@ class PFS(object):
             'status': ('git status', 'nothing to commit', None, None),
             'pending': ('git log origin/@Abranch@..@Abranch@', '@<empty>@',
                         lambda cmd, tag_value: str(cmd).replace('@Abranch@', tag_value, 2), None),
+            'in_branch': ('git rev-parse --abbrev-ref HEAD', 'OTHER', None,
+                          lambda output: "In " + output[:-1] + " branch\n"
+                          if str(output[:-1]).find(self.args.in_branch) != -1 else "In OTHER branch -> " + output),
+            'not_in_branch': ('git rev-parse --abbrev-ref HEAD', 'OTHER', None,
+                              lambda output: "Not in " + output[:-1] + " branch\n"
+                              if str(output)[:-1].find(self.args.not_in_branch) == -1 else "In OTHER branch -> " + output),
         }
 
         self.__submodule_path_pattern = re.compile('path ?= ?([A-za-z0-9-_]+)(\/[A-za-z0-9-_]+)*([A-za-z0-9-_])')
