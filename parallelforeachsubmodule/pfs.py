@@ -48,6 +48,8 @@ class PFS(object):
                             help='Shortcut to "git log <since origin/current>..<until current>"')
         parser.add_argument('--status', dest='status', action='store_true',
                             help='Shortcut to "git status"')
+        parser.add_argument('--in-branch', dest='in_branch',
+                            help='Shortcut to "IF (git rev-parse --abbrev-ref HEAD) == branch"')
         parser.add_argument('--verbose', dest='verbose', action='store_true',
                             help='Verbose option in shortcuts')
         self.args = parser.parse_args()
@@ -148,6 +150,12 @@ class PFS(object):
                 output_filter = self.__cmd_alias["pending"][1]
             command_function = self.__cmd_alias["pending"][2]
             output_function = self.__cmd_alias["pull"][3]
+        if self.args.in_branch:
+            command = self.__cmd_alias["in_branch"][0]
+            if not self.args.verbose:
+                output_filter = self.__cmd_alias["in_branch"][1]
+            command_function = self.__cmd_alias["in_branch"][2]
+            output_function = self.__cmd_alias["in_branch"][3]
         try:
             self.empty_cmd(command)
         except argparse.ArgumentTypeError as e:
