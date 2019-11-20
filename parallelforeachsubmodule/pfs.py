@@ -13,13 +13,13 @@ import time
 import multiprocessing
 
 
-def worker(submodule_list, path, command, counter, output_filter="", cmd_func=None):
+def worker(submodule_list, path, command, counter, output_filter="", cmd_func=None, output_func=None):
     if isinstance(submodule_list, Scheduler):
         while not submodule_list.empty():
-            PFSProcess(submodule_list.get(), path, command, counter, output_filter, cmd_func).run()
+            PFSProcess(submodule_list.get(), path, command, counter, output_filter, cmd_func, output_func).run()
     else:
         for submodule in submodule_list:
-            PFSProcess(submodule, path, command, counter, output_filter, cmd_func).run()
+            PFSProcess(submodule, path, command, counter, output_filter, cmd_func, output_func).run()
 
 
 class PFS(object):
@@ -129,21 +129,25 @@ class PFS(object):
         command = self.args.command
         output_filter = ""
         command_function = None
+        output_function = None
         if self.args.pull:
             command = self.__cmd_alias["pull"][0]
             if not self.args.verbose:
                 output_filter = self.__cmd_alias["pull"][1]
             command_function = self.__cmd_alias["pull"][2]
+            output_function = self.__cmd_alias["pull"][3]
         if self.args.status:
             command = self.__cmd_alias["status"][0]
             if not self.args.verbose:
                 output_filter = self.__cmd_alias["status"][1]
             command_function = self.__cmd_alias["status"][2]
+            output_function = self.__cmd_alias["pull"][3]
         if self.args.pending:
             command = self.__cmd_alias["pending"][0]
             if not self.args.verbose:
                 output_filter = self.__cmd_alias["pending"][1]
             command_function = self.__cmd_alias["pending"][2]
+            output_function = self.__cmd_alias["pull"][3]
         try:
             self.empty_cmd(command)
         except argparse.ArgumentTypeError as e:
@@ -154,11 +158,11 @@ class PFS(object):
             if self.args.schedule == "load-share":
                 t = threading.Thread(target=worker,
                                      args=(scheduler, self.args.path, command, self.__counter,
-                                           output_filter, command_function,))
+                                           output_filter, command_function, output_function,))
             else:
                 t = threading.Thread(target=worker,
                                      args=(list_submodule_list[i], self.args.path, command, self.__counter,
-                                           output_filter, command_function,))
+                                           output_filter, command_function, output_function,))
             self.__threads.append(t)
             t.start()
 
