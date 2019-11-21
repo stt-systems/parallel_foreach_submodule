@@ -126,7 +126,7 @@ class TestPFS(unittest.TestCase):
                                         '/tmp/git_submodules_test_project/submodules/linearizator' +
                                         ' && git checkout develop', shell=True).decode('utf-8'))
             print(self.sub.check_output('cd ' + os.path.dirname(os.path.abspath(__file__)) +
-                                        '/tmp/git_submodules_test_project' + ' && pfs --not-in-branch develop --verbose',
+                                        '/tmp/git_submodules_test_project' + ' && pfs --in-branch develop --verbose',
                                         shell=True).decode('latin-1'))
 
 
