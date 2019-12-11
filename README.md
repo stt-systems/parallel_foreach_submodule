@@ -29,7 +29,7 @@ You can install or upgrade PFS with:
 Or you can install from source with:
 
 ```bash
-$ git clone https://github.com/RDCH106/parallel_foreach_submodule.git --recursive
+$ git clone https://github.com/stt-systems/parallel_foreach_submodule.git --recursive
 $ cd parallel_foreach_submodule
 $ pip install .
 ```
@@ -51,6 +51,8 @@ List of shortcuts or aliases to write faster some usual operations
 * `pfs --pull` ~ `pfs -c "git pull origin"`
 * `pfs --status` ~ `pfs -c "git status"` 
 * `pfs --pending` ~ `pfs -c "git log <since origin/current>..<until current>"`
+* `pfs --in-branch` ~ `pfs -c "IF (git rev-parse --abbrev-ref HEAD) == branch"`
+* `pfs --not-in-branch` ~ `pfs -c "IF (git rev-parse --abbrev-ref HEAD) != branch"`
 
 ⚠️ Shortcuts only show repositories affected with changes, use `--verbose` for full log
 
@@ -59,4 +61,4 @@ List of shortcuts or aliases to write faster some usual operations
 
 Run the following command to see all options available:
 
-`pfs --help` or ` pfs -h`
+`pfs --help` or `pfs -h`

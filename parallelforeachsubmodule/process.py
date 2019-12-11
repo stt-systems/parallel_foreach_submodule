@@ -5,7 +5,7 @@ import os
 
 
 class PFSProcess(object):
-    def __init__(self, submodule, path, cmd, counter, output_filter="", cmd_func=None):
+    def __init__(self, submodule, path, cmd, counter, output_filter="", cmd_func=None, output_func=None):
         self.__submodule = submodule
         self.__path = path
         self.__cwd = os.path.join(self.__path, self.__submodule)
@@ -14,7 +14,9 @@ class PFSProcess(object):
         self.__output_filter = output_filter
         self.__active_branch = self.get_current_branch(self.__cwd)[:-1]
         self.__cmd_func = cmd_func
+        self.__output_func = output_func
         self.__output = None
+        self.__ret = None
         self.__p = None
 
     @staticmethod
@@ -33,7 +35,10 @@ class PFSProcess(object):
         #print(self.__cmd)
         #print(self.__p.communicate()[0].decode('utf-8'))
         if self.__p.communicate()[0].decode('utf-8') != '':
-            self.__output += self.__p.communicate()[0].decode('utf-8')  # stdoutdata
+            self.__ret = self.__p.communicate()[0].decode('utf-8')  # stdoutdata
+            if self.__output_func:
+                self.__ret = self.__output_func(self.__ret)
+            self.__output += self.__ret
             is_empty = False
 
         if self.__p.communicate()[1]:  # stderrdata
