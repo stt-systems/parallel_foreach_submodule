@@ -51,8 +51,8 @@ List of shortcuts or aliases to write faster some usual operations
 * `pfs --pull` ~ `pfs -c "git pull origin"`
 * `pfs --status` ~ `pfs -c "git status"` 
 * `pfs --pending` ~ `pfs -c "git log <since origin/current>..<until current>"`
-* `pfs --in-branch` ~ `pfs -c "IF (git rev-parse --abbrev-ref HEAD) == branch"`
-* `pfs --not-in-branch` ~ `pfs -c "IF (git rev-parse --abbrev-ref HEAD) != branch"`
+* `pfs --in-branch [branch_name]` ~ `pfs -c "IF (git rev-parse --abbrev-ref HEAD) == branch"`
+* `pfs --not-in-branch [branch_name]` ~ `pfs -c "IF (git rev-parse --abbrev-ref HEAD) != branch"`
 
 ⚠️ Shortcuts only show repositories affected with changes, use `--verbose` for full log
 
