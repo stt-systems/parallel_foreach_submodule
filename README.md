@@ -43,6 +43,12 @@ $ pfs -p "D:\project" -c "git pull origin" -j 8
 
 The example executes command `git pull origin` for each submdoule in `D:\project` using 8 threads.
 
+For commands that include quoted text, such as the message in `git commit`, you must escape the inner quotation marks:
+
+```bash
+$ pfs -p "D:\project" -c "git commit -m \"Your commit message\"" -j 8
+```
+
 
 ### Shortcuts
 
